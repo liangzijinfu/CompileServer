@@ -3,6 +3,7 @@
 
 可以用作python程序的加密上传。
 
+## 设置
 运行这个服务需要
 * 自己生成证书（crt文件和key文件），放到dockerConfig.json中配置的路径下
 * 安装sdk，以及必要的python包
@@ -26,3 +27,12 @@
 
    netstat -anltp | grep 8889
    
+## 使用
+
+使用服务的时候，需要把客户端的配置文件CloudQuant.xml中的
+
+\<entry key="Business.CompileServiceUrl" value="http://compile.yunkuanke.com/" /\>
+
+改为您自己的compile service的地址，比如：
+
+\<entry key="Business.CompileServiceUrl" value="http://192.168.1.111：8889/" /\>
