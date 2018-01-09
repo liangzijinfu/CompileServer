@@ -2,3 +2,27 @@
 接收上传一个py文件，把它用cython编译成.so文件，再传递给接收的程序。
 
 可以用作python程序的加密上传。
+
+运行这个服务需要
+* 自己生成证书（crt文件和key文件），放到dockerConfig.json中配置的路径下
+* 安装sdk，以及必要的python包
+* 安装supervisor，用来启动服务
+
+也可以直接下载我们预先准备好的docker file:
+
+1. 下载compile镜像
+
+   wget http://updateapi.yunkuanke.com/download/dockerimages/CompileService.tar.gz
+
+2. 导入镜像
+
+   docker -i CompileService.tar.gz
+
+3. 启动compile service容器 (注：name表示容器名称，-p映射端口)
+
+   docker run -d -p 8889:8889 --name=lzjf_compileservice -it compileservice_opensource:docker bash
+
+4. 检查compile服务(查看其端口是否已经开启)
+
+   netstat -anltp | grep 8889
+   
