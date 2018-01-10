@@ -23,9 +23,9 @@
 
    docker run -d -p 8889:8889 --name=lzjf_compileservice -it compileservice_opensource:docker bash
 
-4. 检查compile服务(查看其端口是否已经开启)
+4. 检查compile服务
 
-   netstat -anltp | grep 8889
+   docker ps -a |grep lzjf_compileservice
    
 ## 使用
 
