@@ -17,7 +17,7 @@
 
 2. 导入镜像
 
-   docker load -i CompileService.tar.gz
+   docker load -i CompileService.tar.gz
 
 3. 启动compile service容器 (注：name表示容器名称，-p映射端口)
 
