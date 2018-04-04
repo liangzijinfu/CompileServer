@@ -24,8 +24,8 @@ class CompilePyHandler(tornado.web.RequestHandler):
 
         files = self.request.files.get('pyFile')
         if files:
-            name = files[0].get('filename')
-            str = name.split('.')
+            uploadFileName = files[0].get('filename')
+            str = uploadFileName.split('.')
             fileName = str[0]
             fileExtension = '.' + str[1]
 
@@ -46,10 +46,10 @@ class CompilePyHandler(tornado.web.RequestHandler):
                             break
                         self.write(data)
             else:
-                # self.set_status(500)
+                self.set_status(500)
                 self.write(result)
         else:
-            # self.set_status(400)
-            self.write('unsupported file extension ' + fileExtension)
+            self.set_status(400)
+            self.write('unsupported file ' + uploadFileName)
 
         self.finish()
