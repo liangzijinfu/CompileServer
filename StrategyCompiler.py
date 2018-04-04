@@ -36,6 +36,7 @@ if __name__ == "__main__":
 
         application = tornado.web.Application([
             (r"/", UploadPyFileHandler),
+            (r"/upload.do", UploadPyFileHandler),
             (r"/test.do", TestHandler),
             (r"/compile.do", CompilePyHandler),
         ])

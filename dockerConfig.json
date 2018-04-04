@@ -1,7 +1,7 @@
 {
     "port":8888,
     "forwardUrl":"http://strategyfarm.yunkuanke.com/upload.do",
-    "workingDir":"/data/tmp_docker",
-    "crtPath":"/opt/CompileSvc/server.crt",
-    "keyPath":"/opt/CompileSvc/server.key"
+    "workingDir":"./wwwroot/data",
+    "crtPath":"./wwwroot/server.crt",
+    "keyPath":"./wwwroot/server.key"
 }
