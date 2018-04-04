@@ -4,6 +4,7 @@ import Handler
 import json
 import tornado.options
 from Handler.UploadPyFileHandler import UploadPyFileHandler
+from Handler.CompilePyHandler import CompilePyHandler
 from Handler.TestHandler import TestHandler
 
 _config = {}
@@ -36,6 +37,7 @@ if __name__ == "__main__":
         application = tornado.web.Application([
             (r"/", UploadPyFileHandler),
             (r"/test.do", TestHandler),
+            (r"/compile.do", CompilePyHandler),
         ])
 
         http_server = tornado.httpserver.HTTPServer(application, ssl_options={
