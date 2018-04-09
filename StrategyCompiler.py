@@ -1,13 +1,12 @@
 # -*- coding: UTF-8 -*-
 
-import Handler
 import json
 import tornado.options
 from Handler.UploadPyFileHandler import UploadPyFileHandler
 from Handler.CompilePyHandler import CompilePyHandler
 from Handler.TestHandler import TestHandler
 
-_config = {}
+import Config
 
 if __name__ == "__main__":
     from sys import argv
@@ -29,8 +28,8 @@ if __name__ == "__main__":
         with open(argv[1]) as configFile:
             _config = json.load(configFile)
 
-        Handler.UploadPyFileHandler.workingDir = _config['workingDir']
-        Handler.UploadPyFileHandler.forwardUrl = _config['forwardUrl']
+        Config.workingDir = _config['workingDir']
+        Config.forwardUrl = _config['forwardUrl']
         crtPath = _config['crtPath']
         keyPath = _config['keyPath']
 

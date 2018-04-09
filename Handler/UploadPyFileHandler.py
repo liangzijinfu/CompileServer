@@ -4,9 +4,7 @@ import time
 import requests
 
 from Compile import *
-
-workingDir = ''
-forwardUrl = ''
+import Config
 
 class UploadPyFileHandler(tornado.web.RequestHandler):
     def post(self):
@@ -18,7 +16,7 @@ class UploadPyFileHandler(tornado.web.RequestHandler):
         fileExtension = self.request.headers.get('fileExtension').lower()
         access_token = self.request.headers.get('access_token')
 
-        targetDir = os.path.join(workingDir, strategyId + '_' + time.strftime('_%Y%m%d%H%M%S', time.localtime()))
+        targetDir = os.path.join(Config.workingDir, strategyId + '_' + time.strftime('_%Y%m%d%H%M%S', time.localtime()))
         if fileExtension == '.py':
             fileName = 'STR' + strategyId + fileExtension
 
@@ -43,7 +41,7 @@ class UploadPyFileHandler(tornado.web.RequestHandler):
         fileName = 'STR' +  strategyId + fileExtension
         filePathName = os.path.join(path, fileName)
         with open(filePathName, 'rb') as data:
-            res = requests.post(forwardUrl, headers=headers, data=data)
+            res = requests.post(Config.forwardUrl, headers=headers, data=data)
             if res.status_code == 200 :
                  #result = json.dumps({"msg" : "success", "status" : 200})
                  result = res.content

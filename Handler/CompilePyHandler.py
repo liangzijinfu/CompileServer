@@ -1,13 +1,9 @@
 # -*- coding: UTF-8 -*-
 import tornado.web
 import time
-import requests
 
 from Compile import *
-
-workingDir = ''
-forwardUrl = ''
-
+import Config
 
 class CompilePyHandler(tornado.web.RequestHandler):
     def get(self):
@@ -29,7 +25,7 @@ class CompilePyHandler(tornado.web.RequestHandler):
             fileName = str[0]
             fileExtension = '.' + str[1]
 
-        targetDir = os.path.join(workingDir, fileName + '_' + time.strftime('_%Y%m%d%H%M%S', time.localtime()))
+        targetDir = os.path.join(Config.workingDir, fileName + '_' + time.strftime('_%Y%m%d%H%M%S', time.localtime()))
         saveFile(targetDir, fileName + fileExtension, files[0].body)
 
         if fileExtension == '.py':
