@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-
+import os
 import json
 import tornado.options
 from Handler.UploadPyFileHandler import UploadPyFileHandler
@@ -33,12 +33,14 @@ if __name__ == "__main__":
         crtPath = _config['crtPath']
         keyPath = _config['keyPath']
 
-        application = tornado.web.Application([
+        application = tornado.web.Application(handlers=[
             (r"/", UploadPyFileHandler),
             (r"/upload.do", UploadPyFileHandler),
             (r"/test.do", TestHandler),
-            (r"/compile.do", CompilePyHandler),
-        ])
+            (r"/compile.do", CompilePyHandler)],
+            template_path=os.path.join(os.path.dirname(__file__), "templates"),
+            static_path=os.path.join(os.path.dirname(__file__), "static")
+        )
 
         http_server = tornado.httpserver.HTTPServer(application, ssl_options={
             "certfile": crtPath,

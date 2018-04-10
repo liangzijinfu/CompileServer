@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0
+    }
+    html,body{
+        width: 100%;
+        height: 100%;
+        position: relative
+    }
+    body div{
+        position: absolute;
+        top: 42%;
+        transform: translateY(-50%);
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    p{
+        line-height: 50px;
+    }
+    label{
+        padding: 6px 5px;
+        border: 1px solid #000;
+        padding-right: 30px;
+        font-size: 12px;
+        color: #ccc;
+        border-radius: 3px
+    }
+    #compileFile{
+        display: none
+    }
+    #submit{
+        background: #424f63;
+        border-color: #374152;
+        border: none;
+        color: #fff;
+        line-height: 28px;
+        border-radius: 3px;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+    img{
+        width: 300px;
+        margin-bottom: 20px;
+    }
+</style>
+<body>
+    <div>
+            <img src="{{ static_url('img/logo.png') }}">
+            <form enctype="multipart/form-data" id="form1">
+                <span></span>
+                <label for='compileFile' id='files'>请选择要编译的python文件</label>
+                <input type="file" accept="text/python" name="pyFile" id="compileFile"/>
+                <input type="submit" value="点击生成so文件" id="submit"/>
+            </form>
+    </div>
+</body>
+<script src="{{ static_url('js/jquery.min.js') }}"></script>
+<script src="{{ static_url('js/jquery-form.js') }}"></script>
+<script>
+    $(function(){
+        let selectFile = document.getElementById("compileFile");
+        let labelSelectFile = document.getElementById("files")
+        let span = document.getElementsByTagName('span')[0]
+        selectFile.onchange = function () {
+            span.innerHTML = '您选择要加密的文件为:  ' +  selectFile.value
+            labelSelectFile.style.display = 'none'
+        }
+        $("#form1").ajaxForm(function(data){
+            if (data.message) {
+                let divError = document.createElement('div')
+                divError.class = 'error'
+                divError.innerHTML = data.message
+                document.body.appendChild(divError)
+            }
+        });
+    }); 
+</script>
+</html>

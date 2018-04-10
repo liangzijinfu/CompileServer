@@ -7,13 +7,7 @@ import Config
 
 class CompilePyHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("../wwwroot/compile.html")
-        # with open("./wwwroot/compile.html", 'rt') as f:
-        #     while True:
-        #         data = f.read(4096)
-        #         if not data:
-        #             break
-        #         self.write(data)
+        self.render("compile.html")
 
     def post(self):
         result = {}

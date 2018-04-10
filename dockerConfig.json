@@ -1,7 +1,7 @@
 {
     "port":8889,
     "forwardUrl":"http://strategyfarm.yunkuanke.com/upload.do",
-    "workingDir":"./wwwroot/data",
-    "crtPath":"./wwwroot/server.crt",
-    "keyPath":"./wwwroot/server.key"
+    "workingDir":"./data",
+    "crtPath":"./server.crt",
+    "keyPath":"./server.key"
 }
