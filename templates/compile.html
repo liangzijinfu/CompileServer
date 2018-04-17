@@ -51,11 +51,14 @@
         width: 300px;
         margin-bottom: 20px;
     }
+    .selectClass{
+   	    color: #000
+     }
 </style>
 <body>
     <div>
             <img src="{{ static_url('img/logo.png') }}">
-            <form enctype="multipart/form-data" id="form1">
+            <form action="compile.do" method="post" enctype="multipart/form-data" id="form1">
                 <span></span>
                 <label for='compileFile' id='files'>请选择要编译的python文件</label>
                 <input type="file" accept="text/python" name="pyFile" id="compileFile"/>
@@ -68,20 +71,12 @@
 <script>
     $(function(){
         let selectFile = document.getElementById("compileFile");
-        let labelSelectFile = document.getElementById("files")
-        let span = document.getElementsByTagName('span')[0]
+        let labelSelectFile = document.getElementById("files");
+        let span = document.getElementsByTagName('span')[0];
         selectFile.onchange = function () {
-            span.innerHTML = '您选择要加密的文件为:  ' +  selectFile.value
-            labelSelectFile.style.display = 'none'
-        }
-        $("#form1").ajaxForm(function(data){
-            if (data.message) {
-                let divError = document.createElement('div')
-                divError.class = 'error'
-                divError.innerHTML = data.message
-                document.body.appendChild(divError)
-            }
-        });
+           $("#files").html(selectFile.value);
+	       $("#files").addClass("selectClass");
+        };
     }); 
 </script>
-</html>
+</html>:
