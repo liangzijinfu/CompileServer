@@ -1,38 +1,15 @@
 # CompileService
-接收上传一个py文件，把它用cython编译成.so文件，再传递给接收的程序。
+接收上传一个py文件，把它用cython编译成.so文件。可以传递给接收的程序，或是返回编译后的so文件以供下载。
 
-可以用作python程序的加密上传。
+由于编译后不可反推出原python代码，可以用作python程序的加密用途。
 
-## 设置
-运行这个服务需要
-* 自己生成证书（crt文件和key文件），放到dockerConfig.json中配置的路径下
-* 安装sdk，以及必要的python包
-* 安装supervisor，用来启动服务
+为了使用户明白我们加密的过程，我们在GitHub内开放了源代码。如不需要看源代码展示，可直接使用服务，以下为使用的步骤：
 
-也可以直接下载我们预先准备好的docker file:
+## 安装docker环境
+* 如果使用的系统是win8/win10 x64 专业版（带hyper-v支持），请下载win10环境下的docker安装文件： http://updateapi.yunkuanke.com/download/dockerimages/win10-docker.zip （366M）。然后按照压缩包内的安装说明文档（win10docker安装.docx）进行安装。
+* 如果使用的是win8/win10 x64 的非专业版、以及win7 x64等不支持hyper-v的64位系统，请下载win7环境下的docker安装文件： http://updateapi.yunkuanke.com/download/dockerimages/win7-docker.zip （256M）。然后按照压缩包内的安装说明文档（win7环境下安装docker安装.docx）进行安装。
+* 32位windows系统不支持安装docker环境。
+* 64位linux系统可自行安装docker环境。
 
-1. 下载compile镜像
-
-   wget http://updateapi.yunkuanke.com/download/dockerimages/CompileService.tar.gz
-
-2. 导入镜像
-
-   docker load -i CompileService.tar.gz
-
-3. 启动compile service容器 (注：name表示容器名称，-p映射端口)
-
-   docker run -d -p 8889:8889 --name=lzjf_compileservice -it compileservice_opensource:docker bash
-
-4. 检查compile服务
-
-   docker ps -a |grep lzjf_compileservice
-   
-## 使用
-
-使用服务的时候，需要把客户端的配置文件CloudQuant.xml中的
-
-\<entry key="Business.CompileServiceUrl" value="http://compile.yunkuanke.com/" /\>
-
-改为您自己的compile service的地址，比如：
-
-\<entry key="Business.CompileServiceUrl" value="http://192.168.1.111：8889/" /\>
+## 下载docker镜像并使用
+    可以从 http://updateapi.yunkuanke.com/download/dockerimages/CompileService.tar.gz （约1.3G）下载最新的docker镜像并解压，然后按照说明文档（Docker CompileSvc使用文档.docx）进行配置和使用。
