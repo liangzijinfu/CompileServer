@@ -12,4 +12,4 @@
 * 64位linux系统可自行安装docker环境。
 
 ## 下载docker镜像并使用
-    可以从 http://updateapi.yunkuanke.com/download/dockerimages/CompileService.tar.gz （约1.3G）下载最新的docker镜像并解压，然后按照说明文档（Docker CompileSvc使用文档.docx）进行配置和使用。
+可以从 http://updateapi.yunkuanke.com/download/dockerimages/CompileService.tar.gz （约1.3G）下载最新的docker镜像并解压，然后按照说明文档（Docker CompileSvc使用文档.docx）进行配置和使用。
