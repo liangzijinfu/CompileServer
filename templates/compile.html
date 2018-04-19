@@ -54,16 +54,24 @@
     .selectClass{
    	    color: #000
      }
+     .tip{
+         font-size: 12px;
+         line-height: 40px;
+         color: #ccc
+     }
+     .error{
+         color: red
+     }
 </style>
 <body>
     <div>
             <img src="{{ static_url('img/logo.png') }}">
             <form action="compile.do" method="post" enctype="multipart/form-data" id="form1">
-                <span></span>
                 <label for='compileFile' id='files'>请选择要编译的python文件</label>
                 <input type="file" accept="text/python" name="pyFile" id="compileFile"/>
                 <input type="submit" value="点击生成so文件" id="submit"/>
             </form>
+            <p class="tip">提示:上传中的文件名只能包含数字，字母，下划线，并且首位不是数字</p>
     </div>
 </body>
 <script src="{{ static_url('js/jquery.min.js') }}"></script>
@@ -73,9 +81,26 @@
         let selectFile = document.getElementById("compileFile");
         let labelSelectFile = document.getElementById("files");
         let span = document.getElementsByTagName('span')[0];
+        let reg = /^[A-Za-z0-9_]{1,}$/
         selectFile.onchange = function () {
-           $("#files").html(selectFile.value);
-	       $("#files").addClass("selectClass");
+            if (selectFile.value) {
+                let selectFileArray = selectFile.value.split("\\")
+                let selectFileName = selectFileArray[selectFileArray.length - 1].split('.')[0]
+                let reg1 = /\d/
+                if (reg.test(selectFileName) && !reg1.test(selectFileName.slice(0,1))) {
+                    $("#files").html(selectFile.value);
+                    $("#files").addClass("selectClass");
+                    $('.tip').removeClass('error')
+                } else {
+                    $('.tip').html('上传中的文件名只能包含数字，字母，下划线，并且首位不是数字')
+                    $('.tip').addClass('error')
+                }
+            } else {
+                if ($("#files").html() === '') {
+                    $('.tip').html('选择的上传路径不能为空')
+                    $('.tip').addClass('error')
+                }
+            }
         };
     }); 
 </script>
