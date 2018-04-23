@@ -25,20 +25,21 @@ class UploadPyFileHandler(tornado.web.RequestHandler):
         if fileExtension == '.py':
             result = compilePyFile(targetDir, fileName)
             if not result:
-                result = self._forward(targetDir, strategyId, '.so', access_token)
+                result = self._forward(targetDir, strategyId, 'STR' + strategyId + '.so', '.so', access_token)
+        elif fileExtension == '.so':
+            result = self._forward(targetDir, strategyId, fileName, fileExtension, access_token)
         elif fileExtension == '.zip':
             result = compileMFile(targetDir, strategyId, fileName)
             if not result:
-                result = self._forward(targetDir, strategyId, '.zip', access_token)
+                result = self._forward(targetDir, strategyId, 'STR' + strategyId + '.zip', '.zip', access_token)
         else:
-            result = self._forward(targetDir, strategyId, fileExtension, access_token)
+            result = 'unsupported file type ' + fileExtension
 
         self.write(result)
         self.flush()
 
-    def _forward(self, path, strategyId, fileExtension, access_token):
-        headers = {'fileExtension': fileExtension, 'strategyId': strategyId, 'access_token': access_token}
-        fileName = 'STR' +  strategyId + fileExtension
+    def _forward(self, path, strategyId, fileName, fileExtension, access_token):
+        headers = {'fileName':fileName, 'fileExtension': fileExtension, 'strategyId': strategyId, 'access_token': access_token}
         filePathName = os.path.join(path, fileName)
         with open(filePathName, 'rb') as data:
             res = requests.post(Config.forwardUrl, headers=headers, data=data)
