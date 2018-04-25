@@ -25,13 +25,13 @@ class UploadPyFileHandler(tornado.web.RequestHandler):
         if fileExtension == '.py':
             result = compilePyFile(targetDir, fileName)
             if not result:
-                result = self._forward(targetDir, strategyId, 'STR' + strategyId + '.so', '.so', access_token)
+                result = self._forward(targetDir, strategyId, 'STR' + strategyId, '.so', access_token)
         elif fileExtension == '.so':
             result = self._forward(targetDir, strategyId, fileName, fileExtension, access_token)
         elif fileExtension == '.zip':
             result = compileMFile(targetDir, strategyId, fileName)
             if not result:
-                result = self._forward(targetDir, strategyId, 'STR' + strategyId + '.zip', '.zip', access_token)
+                result = self._forward(targetDir, strategyId, 'STR' + strategyId, '.zip', access_token)
         else:
             result = 'unsupported file type ' + fileExtension
 
