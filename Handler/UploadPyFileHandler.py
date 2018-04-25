@@ -40,7 +40,7 @@ class UploadPyFileHandler(tornado.web.RequestHandler):
 
     def _forward(self, path, strategyId, fileName, fileExtension, access_token):
         headers = {'fileName':fileName, 'fileExtension': fileExtension, 'strategyId': strategyId, 'access_token': access_token}
-        filePathName = os.path.join(path, fileName)
+        filePathName = os.path.join(path, fileName + fileExtension)
         with open(filePathName, 'rb') as data:
             res = requests.post(Config.forwardUrl, headers=headers, data=data)
             if res.status_code == 200 :
