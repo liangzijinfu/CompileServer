@@ -3,7 +3,7 @@ import tornado.web
 import time
 import requests
 
-from Compile import *
+from Handler.Compile import *
 import Config
 
 class UploadPyFileHandler(tornado.web.RequestHandler):

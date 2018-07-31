@@ -1,6 +1,5 @@
 # -*- coding: UTF-8 -*-
 import tornado.web
-import json
 
 
 class TestHandler(tornado.web.RequestHandler):

@@ -2,7 +2,7 @@
 import tornado.web
 import time
 
-from Compile import *
+from Handler.Compile import *
 import Config
 
 class CompilePyHandler(tornado.web.RequestHandler):
@@ -15,9 +15,9 @@ class CompilePyHandler(tornado.web.RequestHandler):
         files = self.request.files.get('pyFile')
         if files:
             uploadFileName = files[0].get('filename')
-            str = uploadFileName.split('.')
-            fileName = str[0]
-            fileExtension = '.' + str[1]
+            strs = uploadFileName.split('.')
+            fileName = strs[0]
+            fileExtension = '.' + strs[1]
 
         targetDir = os.path.join(Config.workingDir, fileName + '_' + time.strftime('_%Y%m%d%H%M%S', time.localtime()))
         saveFile(targetDir, fileName + fileExtension, files[0].body)

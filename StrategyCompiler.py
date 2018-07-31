@@ -1,7 +1,14 @@
 # -*- coding: UTF-8 -*-
+from __future__ import print_function
+
 import os
 import json
+import logging
+from sys import argv
+
 import tornado.options
+from tornado.log import LogFormatter
+
 from Handler.UploadPyFileHandler import UploadPyFileHandler
 from Handler.CompilePyHandler import CompilePyHandler
 from Handler.TestHandler import TestHandler
@@ -9,10 +16,6 @@ from Handler.TestHandler import TestHandler
 import Config
 
 if __name__ == "__main__":
-    from sys import argv
-    from tornado.log import LogFormatter
-    import logging
-
     tornado.options.options.logging = "debug"
     tornado.options.parse_command_line()
     datefmt = '%Y-%m-%d %H:%M:%S'
@@ -23,7 +26,7 @@ if __name__ == "__main__":
         logHandler.setFormatter(formatter)
 
     if len(argv) != 2:
-        print 'usage: StrategyCompiler.py {config file name}'
+        print('usage: StrategyCompiler.py {config file name}')
     else:
         with open(argv[1]) as configFile:
             _config = json.load(configFile)

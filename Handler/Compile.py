@@ -1,8 +1,9 @@
 # -*- coding: UTF-8 -*-
+from __future__ import print_function
+
 import os
 import json
 import subprocess
-
 
 def saveFile(path, fileName, data):
     if not os.path.exists(path):
@@ -35,9 +36,9 @@ def compilePyFile(path, fileName):
                 errorStr += line
 
         line = proc.stdout.readline()
-        print ">> ", line,  # line has \n, so no need to switch line in print
+        print(">> ", line,)  # line has \n, so no need to switch line in print
 
-    print  # switch line after all printed
+    print()  # switch line after all printed
 
     retStr = None
     if errorStr:
@@ -53,11 +54,11 @@ def compileMFile(path, strategyId, fileName):
     finalFileName = 'STR' + strategyId + '.zip'
 
     # chdir
-    ret = os.chdir(path)
+    os.chdir(path)
 
     # unzip
     cmdStr = 'unzip -o ' + fileName
-    ret = ret or os.system(cmdStr)
+    ret = os.system(cmdStr)
 
     # rename
     if fileName[:-4] != 'Main':
@@ -71,7 +72,7 @@ def compileMFile(path, strategyId, fileName):
     # zip
     cmdStr = 'zip ' + finalFileName + ' *.p'
     ret = ret or os.system(cmdStr)
-    print ret
+    print(ret)
     # remove tmp files
     cmdStr = 'rm -rf *.m *.p'
     ret = ret or os.system(cmdStr)
